@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tigersndragons.salonbooks.core.TestContextConfiguration;
+import org.tigersndragons.salonbooks.model.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={
@@ -21,5 +22,11 @@ public abstract class BaseTestCase extends AbstractTransactionalJUnit4SpringCont
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+
+	protected Person getDefaultPerson() {
+		Person person = new Person();
+		person.setId(0L);
+		return  person;
 	}
 }

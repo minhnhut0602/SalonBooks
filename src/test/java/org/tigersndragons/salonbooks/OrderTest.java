@@ -2,6 +2,8 @@ package org.tigersndragons.salonbooks;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,10 +18,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tigersndragons.salonbooks.exception.PersonNotFoundException;
 import org.tigersndragons.salonbooks.exception.ValidationException;
-import org.tigersndragons.salonbooks.model.Item;
-import org.tigersndragons.salonbooks.model.Order;
-import org.tigersndragons.salonbooks.model.OrderItem;
-import org.tigersndragons.salonbooks.model.Person;
+import org.tigersndragons.salonbooks.model.*;
 import org.tigersndragons.salonbooks.model.flows.PersonFormModel;
 import org.tigersndragons.salonbooks.model.type.GenderType;
 import org.tigersndragons.salonbooks.model.type.OrderStatusType;
@@ -33,18 +32,20 @@ public class OrderTest extends BaseTestCase {
 
 	@Autowired 
 	OrderService orderService;
-	@Autowired 
-	PersonService personService;
+	private PersonService personService;
 	@Autowired 
 	ItemService itemService;
-	@Autowired
-	AppointmentService appointmentService;
+	private AppointmentService appointmentService;
 	
 	private Order e1, e2;
 	@Before
 	public void setUp() throws Exception {
+		personService = mock (PersonService.class);
+
 		e1= new Order();
 		e2= new Order();
+		when (personService.getPersonById(0L)).thenReturn(getDefaultPerson());
+		when (personService.getDefaultPerson()).thenReturn(getDefaultPerson());
 	}
 
 	@After
@@ -152,15 +153,20 @@ public class OrderTest extends BaseTestCase {
 //		assertTrue(StringUtils.equals(emp.getPrimaryPhoneNumber(), e2.getPrimaryPhoneNumber()));
 		//assertTrue(StringUtils.equals(emp.getPassword(), e2.getPassword()));
 	}
-	
+	private Appointment testAppointment(){
+		Appointment appointment = new Appointment();
+		appointment.setId(0L);
+		appointment.setPerson(getDefaultPerson());
+		return appointment;
+	}
 	@Test
 	public void testStartEmptyOrder() {
 		Order emp = orderService.createOrderForPerson(
-				personService.getDefaultPerson(), 
-				appointmentService.createAppointmentForPerson(personService.getDefaultPerson()));
+				personService.getDefaultPerson(),
+				testAppointment());
 		assertTrue(emp!= null 
 				&& emp.getId()!=null);
-		emp =orderService.startOrder(testEmptyOrder());
+		emp =orderService.startOrder(emp);
 		assertTrue(emp!= null 
 				&& emp.getId()!=null
 				&& emp.getStatus().equals(OrderStatusType.PENDING));
@@ -170,7 +176,7 @@ public class OrderTest extends BaseTestCase {
 	public void testCloseEmptyOrder() {
 		Order emp = orderService.createOrderForPerson(
 				personService.getDefaultPerson(), 
-				appointmentService.createAppointmentForPerson(personService.getDefaultPerson()));
+				testAppointment());
 		assertTrue(emp!= null 
 				&& emp.getId()!=null);
 		emp=orderService.closeOrder(emp);

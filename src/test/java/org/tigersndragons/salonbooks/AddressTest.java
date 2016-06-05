@@ -10,10 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tigersndragons.salonbooks.model.Address;
-import org.tigersndragons.salonbooks.model.Person;
 import org.tigersndragons.salonbooks.service.AddressService;
 import org.tigersndragons.salonbooks.service.PersonService;
-import org.tigersndragons.salonbooks.service.impl.PersonServiceImpl;
 
 import java.util.List;
 
@@ -29,11 +27,9 @@ public class AddressTest extends BaseTestCase {
 
 	@Autowired 
 	AddressService addressService;
-	private
-	PersonService personService;
-
-	
+	private PersonService personService;
 	private Address e1, e2;
+
 	@Before
 	public void setUp() throws Exception {
 		personService = mock(PersonService.class);
@@ -47,11 +43,7 @@ public class AddressTest extends BaseTestCase {
 	public void tearDown() throws Exception {
 	}
 
-	private Person getDefaultPerson() {
-		Person person = new Person();
-		person.setId(0L);
-		return  person;
-	}
+
 
 	@Test
 	public void testMatchId() {
