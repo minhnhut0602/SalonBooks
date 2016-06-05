@@ -1,6 +1,6 @@
 package org.tigersndragons.salonbooks.service.impl;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -162,7 +162,7 @@ public class ContactServiceImpl extends BaseServiceImpl implements ContactServic
 		try {
 			URL aUrl = new URL(emp6.getFormat());
 		} catch (MalformedURLException e) {
-			assertTrue(e==null);
+			//assertTrue(e==null);
 		}		
 		return contacts;
 	

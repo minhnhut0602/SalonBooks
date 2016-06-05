@@ -1,59 +1,65 @@
 package org.tigersndragons.salonbooks;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.exception.ConstraintViolationException;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tigersndragons.salonbooks.exception.PersonNotFoundException;
-import org.tigersndragons.salonbooks.exception.ValidationException;
 import org.tigersndragons.salonbooks.model.Address;
-import org.tigersndragons.salonbooks.model.Appointment;
 import org.tigersndragons.salonbooks.model.Person;
-import org.tigersndragons.salonbooks.model.flows.PersonFormModel;
-import org.tigersndragons.salonbooks.model.type.AppointmentStatusType;
-import org.tigersndragons.salonbooks.model.type.GenderType;
 import org.tigersndragons.salonbooks.service.AddressService;
-import org.tigersndragons.salonbooks.service.AppointmentService;
-import org.tigersndragons.salonbooks.service.EmployeeService;
 import org.tigersndragons.salonbooks.service.PersonService;
+import org.tigersndragons.salonbooks.service.impl.PersonServiceImpl;
+
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AddressTest extends BaseTestCase {
 
 	@Autowired 
 	AddressService addressService;
-	@Autowired 
-	EmployeeService employeeService;
-	@Autowired 
+	private
 	PersonService personService;
+
 	
 	private Address e1, e2;
 	@Before
 	public void setUp() throws Exception {
+		personService = mock(PersonService.class);
 		e1= new Address();
 		e2= new Address();
+		when (personService.getPersonById(0L)).thenReturn(getDefaultPerson());
+		when (personService.getDefaultPerson()).thenReturn(getDefaultPerson());
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 
+	private Person getDefaultPerson() {
+		Person person = new Person();
+		person.setId(0L);
+		return  person;
+	}
+
 	@Test
 	public void testMatchId() {
 		e1.setId(0L);
 		e2.setId(0L);
-		assertTrue(e1.equals(e2));
+		assertThat(e1, is(e2));
 		e2.setId(1L);
-		assertFalse(e1.equals(e2));
+		assertThat(e1, not(e2));
 	}
 	
 	@Test
@@ -76,7 +82,7 @@ public class AddressTest extends BaseTestCase {
 		emp.setCity("Des Moines");
 		emp.setState("IA");
 		emp.setZip("50315");
-		emp.setPerson(personService.getDefaultPerson());
+		emp.setPerson(getDefaultPerson());
 		emp.setCreateDate(new DateTime());
 		emp.setUpdateDate(new DateTime());
 		return emp;

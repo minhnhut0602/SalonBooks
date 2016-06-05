@@ -41,7 +41,7 @@ public class HibernateConfiguration implements TransactionManagementConfigurer{
 		BasicDataSource defaultds = new org.apache.commons.dbcp.BasicDataSource();
 		defaultds.setDriverClassName("com.mysql.jdbc.Driver");
 		defaultds.setPassword("salonbooks123");
-		defaultds.setUrl("jdbc:mysql://localhost:3306/iatiger_salonbooks");
+		defaultds.setUrl("jdbc:mysql://localhost:3306/salonbooks");
 		defaultds.setUsername("salonbooks");
 		defaultds.setInitialSize(30);
 		defaultds.setPoolPreparedStatements(true);

@@ -53,8 +53,8 @@ public class EmployeeTest extends BaseTestCase {
 	private Employee theDefaultEmployee(){
 		Employee emp = new Employee();
 		emp.setId(0L);
-		emp.setName("Bret-Wayne Dillon-Hansen");
-		emp.setUsername("bdillon");
+		emp.setName("Default");
+		emp.setUsername("default");
 		emp.setPassword("password1");
 		return emp;
 	}

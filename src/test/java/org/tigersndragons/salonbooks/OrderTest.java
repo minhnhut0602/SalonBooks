@@ -38,8 +38,6 @@ public class OrderTest extends BaseTestCase {
 	@Autowired 
 	ItemService itemService;
 	@Autowired
-	ShippingMethodService shippingMethodService;
-	@Autowired
 	AppointmentService appointmentService;
 	
 	private Order e1, e2;
@@ -81,7 +79,7 @@ public class OrderTest extends BaseTestCase {
 		emp.setStatus(OrderStatusType.OPEN);
 		emp.setPerson(personService.getDefaultPerson());
 		emp.setNumOfItems(0);
-		emp.setShipper(shippingMethodService.getDefaultShipper());
+	//	emp.setShipper(shippingMethodService.getDefaultShipper());
 		emp.setCurrency("USD");
 		emp.setSubTotal(new BigDecimal("0.00"));
 		emp.setTax(new BigDecimal("0.00"));
@@ -112,28 +110,28 @@ public class OrderTest extends BaseTestCase {
 	}
 	
 	public  Order testOrderwithItem(){
-		Order emp = new Order();
-		emp.setId(1L);
-		emp.setStatus(OrderStatusType.OPEN);
-		emp.setPerson(personService.getDefaultPerson());
-		emp.setNumOfItems(0);
-		emp.setShipper(shippingMethodService.getDefaultShipper());
-		emp.setCurrency("USD");
-		emp.setSubTotal(new BigDecimal("0.00"));
-		emp.setTax(new BigDecimal("0.00"));
-		emp.setTotal(new BigDecimal("0.00"));
-		emp.setCreateDate(new DateTime());
-		emp.setUpdateDate(new DateTime());
+		Order order = new Order();
+		order.setId(0L);
+		order.setStatus(OrderStatusType.OPEN);
+		order.setPerson(personService.getDefaultPerson());
+		order.setNumOfItems(0);
+//		order.setShipper(shippingMethodService.getDefaultShipper());
+		order.setCurrency("USD");
+		order.setSubTotal(new BigDecimal("0.00"));
+		order.setTax(new BigDecimal("0.00"));
+		order.setTotal(new BigDecimal("0.00"));
+		order.setCreateDate(new DateTime());
+		order.setUpdateDate(new DateTime());
 		Item item = itemService.createItem();
 		item.setId(0L);
 		OrderItem orderItem = new OrderItem ();
-		orderItem.setOrder(emp);
+		orderItem.setOrder(order);
 		orderItem.setItem(item);
 		orderItem.setQuantity(new BigDecimal(1));
 		orderItem.setNotes("notes");
-		
-		emp = orderService.addItemToOrder(orderItem, emp, item);
-		return emp;
+
+		order = orderService.addItemToOrder(orderItem, order, item);
+		return order;
 	}
 
 	
@@ -175,7 +173,7 @@ public class OrderTest extends BaseTestCase {
 				appointmentService.createAppointmentForPerson(personService.getDefaultPerson()));
 		assertTrue(emp!= null 
 				&& emp.getId()!=null);
-		emp=orderService.closeOrder(testEmptyOrder());
+		emp=orderService.closeOrder(emp);
 		assertTrue(emp!= null );
 		assertTrue( emp.getId()!=null);
 		assertTrue( emp.getStatus().equals(OrderStatusType.CLOSED));
