@@ -1,36 +1,25 @@
 package org.tigersndragons.salonbooks;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.tigersndragons.salonbooks.model.Contact;
+import org.tigersndragons.salonbooks.model.Person;
+import org.tigersndragons.salonbooks.model.type.ContactType;
+import org.tigersndragons.salonbooks.service.ContactService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.exception.ConstraintViolationException;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.tigersndragons.salonbooks.exception.PersonNotFoundException;
-import org.tigersndragons.salonbooks.exception.ValidationException;
-import org.tigersndragons.salonbooks.model.Contact;
-import org.tigersndragons.salonbooks.model.Appointment;
-import org.tigersndragons.salonbooks.model.Person;
-import org.tigersndragons.salonbooks.model.flows.PersonFormModel;
-import org.tigersndragons.salonbooks.model.type.AppointmentStatusType;
-import org.tigersndragons.salonbooks.model.type.ContactType;
-import org.tigersndragons.salonbooks.model.type.GenderType;
-import org.tigersndragons.salonbooks.service.ContactService;
-import org.tigersndragons.salonbooks.service.AppointmentService;
-import org.tigersndragons.salonbooks.service.EmployeeService;
-import org.tigersndragons.salonbooks.service.PersonService;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ContactTest extends BaseTestCase {
 

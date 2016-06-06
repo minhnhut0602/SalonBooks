@@ -1,32 +1,28 @@
 package org.tigersndragons.salonbooks;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.math.BigDecimal;
-import java.util.List;
-
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tigersndragons.salonbooks.exception.PersonNotFoundException;
-import org.tigersndragons.salonbooks.exception.ValidationException;
-import org.tigersndragons.salonbooks.model.*;
-import org.tigersndragons.salonbooks.model.flows.PersonFormModel;
-import org.tigersndragons.salonbooks.model.type.GenderType;
+import org.tigersndragons.salonbooks.model.Appointment;
+import org.tigersndragons.salonbooks.model.Item;
+import org.tigersndragons.salonbooks.model.Order;
+import org.tigersndragons.salonbooks.model.OrderItem;
 import org.tigersndragons.salonbooks.model.type.OrderStatusType;
 import org.tigersndragons.salonbooks.service.AppointmentService;
 import org.tigersndragons.salonbooks.service.ItemService;
 import org.tigersndragons.salonbooks.service.OrderService;
 import org.tigersndragons.salonbooks.service.PersonService;
-import org.tigersndragons.salonbooks.service.ShippingMethodService;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class OrderTest extends BaseTestCase {
 
