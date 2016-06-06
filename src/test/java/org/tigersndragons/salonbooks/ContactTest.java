@@ -31,16 +31,12 @@ import org.tigersndragons.salonbooks.service.ContactService;
 import org.tigersndragons.salonbooks.service.AppointmentService;
 import org.tigersndragons.salonbooks.service.EmployeeService;
 import org.tigersndragons.salonbooks.service.PersonService;
-@Ignore
+
 public class ContactTest extends BaseTestCase {
 
 	@Autowired 
 	ContactService contactService;
-	@Autowired 
-	EmployeeService employeeService;
-	@Autowired 
-	PersonService personService;
-	
+
 	private Contact e1, e2;
 	@Before
 	public void setUp() throws Exception {
@@ -82,14 +78,14 @@ public class ContactTest extends BaseTestCase {
 		ct.setId(0L);
 		ct.setName("MOBILE_PHONE");
 		emp.setContactType(ct);
-		emp.setPerson(personService.getDefaultPerson());
+		emp.setPerson(getDefaultPerson());
 		emp.setCreateDate(new DateTime());
 		emp.setUpdateDate(new DateTime());
 		return emp;
 	}
 	@Test 
 	public void retrieveDefaultAppointment(){
-		Contact emp = contactService.createContactTypeForPerson(personService.getDefaultPerson(),null);
+		Contact emp = contactService.createContactTypeForPerson(getDefaultPerson(),null);
 		assertTrue(emp.getLabel().equals( theDefaultContact().getLabel()));
 		
 	}
@@ -98,13 +94,13 @@ public class ContactTest extends BaseTestCase {
 	public void testContactFactory(){
 		ContactType ct = new ContactType();
 		ct.setId(0L);
-		Contact emp = contactService.createContactTypeForPerson(personService.getDefaultPerson(),ct,"3196216807");
+		Contact emp = contactService.createContactTypeForPerson(getDefaultPerson(),ct,"3196216807");
 		assertTrue(emp.getLabel().equals( "3196216807"));
 		ct.setId(1L);
-		Contact emp1 = contactService.createContactTypeForPerson(personService.getDefaultPerson(),ct,"5152810000");
+		Contact emp1 = contactService.createContactTypeForPerson(getDefaultPerson(),ct,"5152810000");
 		assertTrue(emp1.getContactType().getName().equals("HOME_PHONE"));
 		ct.setId(4L);
-		Contact emp4 = contactService.createContactTypeForPerson(personService.getDefaultPerson(),ct,"@iowatiger08");
+		Contact emp4 = contactService.createContactTypeForPerson(getDefaultPerson(),ct,"@iowatiger08");
 		assertTrue(emp4.getContactType().getName().equals("TWITTER"));
 		try {
 			URL aUrl = new URL(emp4.getFormat());
@@ -112,7 +108,7 @@ public class ContactTest extends BaseTestCase {
 			assertTrue(e==null);
 		}
 		ct.setId(6L);
-		Contact emp6 = contactService.createContactTypeForPerson(personService.getDefaultPerson(),ct,"iowatiger08@gmail.ca");
+		Contact emp6 = contactService.createContactTypeForPerson(getDefaultPerson(),ct,"iowatiger08@gmail.ca");
 		assertTrue(emp6.getContactType().getName().equals("EMAIL"));
 		try {
 			URL aUrl = new URL(emp6.getFormat());
@@ -120,6 +116,7 @@ public class ContactTest extends BaseTestCase {
 			assertTrue(e==null);
 		}
 	}
+	@Ignore
 	@Test
 	public  void createDefaultContacts() {
 		Person person = new Person();
@@ -151,7 +148,7 @@ public class ContactTest extends BaseTestCase {
 	
 	@Test 
 	public void retrieveListOfContact(){
-		List<Contact > apptList = contactService.getContactsByPerson(personService.getDefaultPerson());
+		List<Contact > apptList = contactService.getContactsByPerson(getDefaultPerson());
 		assertTrue(CollectionUtils.isNotEmpty(apptList)
 				&& apptList.size()>0);
 		assertTrue(apptList.get(0).equals(this.theDefaultContact()));
