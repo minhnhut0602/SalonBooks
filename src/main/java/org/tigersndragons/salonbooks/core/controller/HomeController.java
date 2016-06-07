@@ -28,30 +28,7 @@ public class HomeController {
   	private AppointmentService appointmentService;
   	@Autowired
   	HomeFlowActions homeFlowActions;
-  	@Autowired
-	private LoginService loginService;
-	@Autowired
-	LoginFlowActions loginActionFlows;
-	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String showLogin(Model model){
-		return "login";
-	}
-	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String doLogin(@ModelAttribute("loginFlowActions") LoginFlowActions loginFlowActions, 
-			BindingResult result,
-			Model model){
-		if (loginService.doLogin()!=null 
-				|| !result.hasErrors()){
-			model.addAttribute("employee", loginService.doLogin());
-			result.getModel().put("employee", loginService.doLogin());
-			result.getModel().put("homeFlowActions", homeFlowActions);
-			return "redirect:/home";
-		}else{
-			return "login";
-		}
-	}
+
 
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
@@ -98,8 +75,5 @@ public class HomeController {
 	}
 	public void  setHomeFlowActions(HomeFlowActions homeFlowActions){
 		this.homeFlowActions = homeFlowActions;
-	}
-	public void setLoginService(LoginService loginService) {
-		this.loginService = loginService;
 	}
 }

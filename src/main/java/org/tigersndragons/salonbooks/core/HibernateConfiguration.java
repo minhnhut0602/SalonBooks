@@ -117,12 +117,7 @@ public class HibernateConfiguration implements TransactionManagementConfigurer{
 		builder.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect" );
 		return builder.buildSessionFactory();
 	}
-//	@Bean
-//	public OpenSessionInViewFilter openSessionInViewFilter(){
-//		OpenSessionInViewFilter filter = new OpenSessionInViewFilter();
-//		//filter.
-//		return filter;
-//	}
+
 	@Bean	
 	public PlatformTransactionManager annotationDrivenTransactionManager() {
 		return hibernateTransactionManager();

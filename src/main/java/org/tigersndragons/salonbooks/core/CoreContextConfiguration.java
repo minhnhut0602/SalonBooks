@@ -19,7 +19,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 	WebMVCConfiguration.class,
 	ServiceConfiguration.class, 
 	DAOConfiguration.class
-	,ServiceFlowConfiguration.class
 })
 @ComponentScan("org.tigersndragons.salonbooks.model org.tigersndragons.salonbooks.exception")
 public class CoreContextConfiguration {

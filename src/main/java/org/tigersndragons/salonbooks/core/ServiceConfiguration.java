@@ -27,13 +27,10 @@ import org.tigersndragons.salonbooks.service.impl.ShippingMethodServiceImpl;
 
 @Configuration
 public class ServiceConfiguration {
-//	@Autowired
-//	DAOConfiguration daoConfig;
+
 	@Bean
 	public EmployeeService employeeService(){
 		EmployeeServiceImpl service = new EmployeeServiceImpl();
-//		service.setEmployeeDAO(daoConfig.employeeDAO());
-//		service.setEncryptionService(encryptionService());
 		return service;
 	}
 	
@@ -44,8 +41,6 @@ public class ServiceConfiguration {
 	@Bean
 	public AppointmentService appointmentService(){
 		AppointmentServiceImpl service = new AppointmentServiceImpl();
-//		service.setAppointmentDAO(daoConfig.appointmentDAO());
-//		service.setPersonService(personService());
 		service.setEmployeeService(employeeService());
 		return service;
 	}
@@ -57,13 +52,11 @@ public class ServiceConfiguration {
 	@Bean
 	public ShippingMethodService shippingMethodService(){
 		ShippingMethodServiceImpl service= new ShippingMethodServiceImpl();
-//		service.setShipperDAO(daoConfig.shipperDAO());
 		return service;
 	}
 	@Bean
 	public ItemService itemService(){
 		ItemServiceImpl service= new ItemServiceImpl();
-//		service.setItemDAO(daoConfig.itemDAO());
 		return service;
 	}
 	@Bean
@@ -71,7 +64,6 @@ public class ServiceConfiguration {
 		OrderServiceImpl service = new OrderServiceImpl();
 		service.setAppointmentService(appointmentService());
 		service.setEmployeeService(employeeService());
-//		service.setOrderDAO(daoConfig.orderDAO());
 		service.setItemService(itemService());
 		service.setPaymentService(paymentService());
 		service.setShipperService(shippingMethodService());
@@ -81,17 +73,13 @@ public class ServiceConfiguration {
 	@Bean 
 	public AddressService addressService(){
 		AddressServiceImpl service = new AddressServiceImpl();
-//		service.setAddressDAO(daoConfig.addressDAO());
-//		service.setEmployeeService(employeeService());
-//		service.setPersonService(personService());
+
 		return service;
 	}	
 	@Bean 
 	public ContactService contactService(){
 		ContactServiceImpl service = new ContactServiceImpl();
 		service.setEmployeeService(employeeService());
-//		service.setPersonService(personService());
-//		service.setContactDAO(daoConfig.contactDAO());
 		return service;
 	}
 	@Bean
@@ -101,7 +89,6 @@ public class ServiceConfiguration {
 		service.setOrderService(orderService());
 		service.setAddressService(addressService());
 		service.setContactService(contactService());
-//		service.setPersonDAO(daoConfig.personDAO());
 		return service;
 	}
 
@@ -113,7 +100,7 @@ public class ServiceConfiguration {
 		homeService.setOrderService(orderService());
 		homeService.setPersonService(personService());
 		homeService.setShipperService(shippingMethodService());
-		return homeService;//homeService.setPersonDAO(personDAO);
+		return homeService;
 	}
 
 }

@@ -14,8 +14,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 	ServiceConfiguration.class,
 	FlowConfiguration.class,
 	DAOConfiguration.class,
-	WebMVCConfiguration.class,
-	ServiceFlowConfiguration.class
+	WebMVCConfiguration.class
 //	MockRepositoryConfiguration.class
 })
 public class TestContextConfiguration {

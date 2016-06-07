@@ -19,16 +19,12 @@
 
 		<form:form id="login" 
 		modelAttribute="loginFlowActions" 
-		action="${flowExecutionUrl}" >
-	
-      <input type="hidden" name="_flowExecutionKey" 
-             value="${flowExecutionKey}" />
+		method="POST"
+		action="login.jsp" >
              
-		User: <br/><form:input type="text" path="username" />
-		<form:errors cssClass="error" path="username" />
+		User: <br/><form:input  path="username" />
 		<br/>
 		Passcode: <br/><form:input type="password" path="password"/>
-		<form:errors cssClass="error" path="password" /><br/>
 		 <input name="_eventId_doLogin" type="submit" value="Login"/> | 
 		 <input type="button" name="_eventId_cancel" value="Cancel" />
 		</form:form>

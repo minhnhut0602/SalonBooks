@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.transaction.annotation.Transactional;
 import org.tigersndragons.salonbooks.model.Employee;
+import org.tigersndragons.salonbooks.model.flows.LoginFlowActions;
 import org.tigersndragons.salonbooks.service.EmployeeService;
 import org.tigersndragons.salonbooks.service.flow.LoginService;
 
@@ -26,7 +27,10 @@ public class LoginServiceImpl implements LoginService, MessageSourceAware {
 		// TODO actually get employee
 		return employeeService.getDefaultEmployee();
 	}
+	public Employee doLogin(LoginFlowActions loginFlowActions) {
 
+		return doLogin();
+	}
 	@Required
 	public void setEmployeeService(EmployeeService employeeService) {
 		this.employeeService = employeeService;

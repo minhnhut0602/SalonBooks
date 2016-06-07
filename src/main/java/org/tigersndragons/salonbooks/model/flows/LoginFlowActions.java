@@ -14,23 +14,7 @@ public class LoginFlowActions implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
-	private Employee employee;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	public Employee checkEmployee (String user, String pswd){
-		return employeeService.getEmployee(user, pswd);
-	}
-	
-	public Employee doLogin(){
-		if (StringUtils.isEmpty(username)
-				|| StringUtils.isEmpty(password)){
-			return null;
-		}else{
-			return checkEmployee(username, password);
-		}
-	}
+
 
 	public String getUsername() {
 		return username;
@@ -48,12 +32,5 @@ public class LoginFlowActions implements Serializable {
 		this.password = password;
 	}
 
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 	
 }

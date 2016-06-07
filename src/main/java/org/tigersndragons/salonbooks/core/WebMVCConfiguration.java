@@ -13,11 +13,7 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.tigersndragons.salonbooks.core.controller.AppointmentController;
-import org.tigersndragons.salonbooks.core.controller.HomeController;
-import org.tigersndragons.salonbooks.core.controller.ItemController;
-import org.tigersndragons.salonbooks.core.controller.OrderController;
-import org.tigersndragons.salonbooks.core.controller.PersonController;
+import org.tigersndragons.salonbooks.core.controller.*;
 import org.tigersndragons.salonbooks.model.flows.AddOrderItemActions;
 import org.tigersndragons.salonbooks.model.flows.AppointmentFormModel;
 import org.tigersndragons.salonbooks.model.flows.HomeFlowActions;
@@ -29,9 +25,7 @@ import org.tigersndragons.salonbooks.service.flow.impl.LoginServiceImpl;
 
 @Configuration
 public class WebMVCConfiguration extends WebMvcConfigurerAdapter {
-//	@Autowired
-//	private FlowConfiguration webFlowConfig;
-//	ServiceFlowConfiguration serviceConfig;
+
 	
 	@Bean
 	public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
@@ -123,7 +117,7 @@ public class WebMVCConfiguration extends WebMvcConfigurerAdapter {
 		return homeService;
 	}
 	@Bean
-	public LoginFlowActions loginActionFlows(){
+	public LoginFlowActions loginFlowActions(){
 		return new LoginFlowActions();
 	}
 	@Bean
@@ -148,13 +142,19 @@ public class WebMVCConfiguration extends WebMvcConfigurerAdapter {
 	public AddOrderItemActions addOrderItemActions(){
 		return new AddOrderItemActions();
 	}
+
+    @Bean
+    public LoginController loginController(){
+        LoginController controller = new LoginController();
+        return controller;
+    }
 	@Bean
 	public HomeController homeController(){
 		HomeController controller = new HomeController();
 //		controller.setPersonService(serviceConfig.personService());
 //		controller.setAppointmentService(serviceConfig.appointmentService());
 		controller.setHomeFlowActions(homeFlowActions());
-		controller.setLoginService(loginService());
+
 		return controller;
 	}
 	@Bean
