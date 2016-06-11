@@ -20,13 +20,15 @@
 		<form:form id="login" 
 		modelAttribute="loginFlowActions" 
 		method="POST"
-		action="login.jsp" >
+		action="login" >
              
 		User: <br/><form:input  path="username" />
 		<br/>
 		Passcode: <br/><form:input type="password" path="password"/>
 		 <input name="_eventId_doLogin" type="submit" value="Login"/> | 
 		 <input type="button" name="_eventId_cancel" value="Cancel" />
+		 <input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
 		</form:form>
 		</div>
 	</body>

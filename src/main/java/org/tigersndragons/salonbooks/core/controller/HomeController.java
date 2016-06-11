@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.tigersndragons.salonbooks.model.Person;
 import org.tigersndragons.salonbooks.model.flows.HomeFlowActions;
 import org.tigersndragons.salonbooks.model.flows.LoginFlowActions;
@@ -16,6 +17,8 @@ import org.tigersndragons.salonbooks.model.flows.PersonFormModel;
 import org.tigersndragons.salonbooks.service.AppointmentService;
 import org.tigersndragons.salonbooks.service.PersonService;
 import org.tigersndragons.salonbooks.service.flow.LoginService;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -32,14 +35,29 @@ public class HomeController {
 
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public String showHome(
-			Model model){
-		homeFlowActions.setAppointmentList(appointmentService.getOpenAppointments()); 
+	public ModelAndView showHome(
+			@RequestParam(value = "msg", required = false) String msg,
+            HomeFlowActions homeFlowActions,
+            HttpSession session,
+			ModelAndView model){
+
+		//UserDetails uDetail = (UserDetails) session.getAttribute("employee");
+
+		//model.addObject("employee", uDetail);
+		model.addObject("msg", msg);
+		model.setViewName("home");
+		//homeFlowActions.setAppointmentList(appointmentService.getOpenAppointments());
+		model.addObject("openAppointments",appointmentService.getOpenAppointments());
+		Person person = new Person();
+		model.addObject("person", person);
+		model.addObject("homeFlowActions", homeFlowActions);
+		return model;
+		/*homeFlowActions.setAppointmentList(appointmentService.getOpenAppointments());
 		model.addAttribute("openAppointments",homeFlowActions.getAppointmentList());
 		Person person = new Person();
 		model.addAttribute("person", person);
 		model.addAttribute("homeFlowActions", homeFlowActions);
-		return "home";
+		return "home";*/
 	}
 	
 	@RequestMapping(value="/home", method=RequestMethod.POST)

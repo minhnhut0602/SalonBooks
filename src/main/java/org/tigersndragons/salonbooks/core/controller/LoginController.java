@@ -17,8 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
-//  	@Autowired
-//	private LoginService loginService;
+  	@Autowired
+	private LoginService loginService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String displayLogin(Model model) {
         model.addAttribute("loginFlowActions", new LoginFlowActions());
@@ -47,7 +48,7 @@ public class LoginController {
 		if (
                ! result.hasErrors()
                 ){
-			//model.addAttribute("employee", loginService.doLogin());
+			model.addObject("employee", loginService.doLogin());
 			return "home";
 		}else{
 			return "login";
